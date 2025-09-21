@@ -5,17 +5,14 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copy requirements and setup files
-COPY requirements.txt setup.py pyproject.toml ./
+COPY requirements_prod.txt setup.py pyproject.toml ./
 COPY src/ ./src/
-
-# Create a clean requirements file without the local package reference
-RUN grep -v "^-e \.$" requirements.txt > requirements_clean.txt
 
 # Install the local package in editable mode
 RUN pip install --no-cache-dir -e .
 
-# Install other dependencies
-RUN pip install --no-cache-dir -r requirements_clean.txt
+# Install production dependencies
+RUN pip install --no-cache-dir -r requirements_prod.txt
 
 # Copy the rest of the application
 COPY . .
