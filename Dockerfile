@@ -1,22 +1,24 @@
-# Use an official Python 3.10 image from Docker Hub
-FROM python:3.10-slim-buster
+# Use an official Python 3.10 image from Docker Hub (latest stable)
+FROM python:3.10-slim
 
 # Set the working directory
 WORKDIR /app
 
-# Install system dependencies including git
-RUN apt-get update && apt-get install -y \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+# Copy requirements and setup files
+COPY requirements.txt setup.py pyproject.toml ./
+COPY src/ ./src/
 
-# Copy requirements first for better caching
-COPY requirements.txt /app/
+# Create a clean requirements file without the local package reference
+RUN grep -v "^-e \.$" requirements.txt > requirements_clean.txt
 
-# Install the dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install the local package in editable mode
+RUN pip install --no-cache-dir -e .
 
-# Copy your application code
-COPY . /app
+# Install other dependencies
+RUN pip install --no-cache-dir -r requirements_clean.txt
+
+# Copy the rest of the application
+COPY . .
 
 # Expose the port FastAPI will run on
 EXPOSE 5000
