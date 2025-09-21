@@ -181,6 +181,10 @@ artifact/
 *.pkl
 *.yaml
 
+# Allow GitHub workflow files
+!.github/workflows/*.yaml
+!.github/workflows/*.yml
+
 # Other common ignores
 __pycache__/
 *.pyc
