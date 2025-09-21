@@ -37,9 +37,6 @@ graph TB
     N --> O[Automated Deployment]
 ```
 
-## 🚀 Live Demo
-
-**🌐 Application URL**: `http://13.233.183.226:5000`
 
 **🔗 Features**:
 - Real-time vehicle insurance prediction
