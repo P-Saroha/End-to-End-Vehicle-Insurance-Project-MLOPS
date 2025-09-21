@@ -68,7 +68,7 @@ scipy==1.16.2
 seaborn==0.13.2
 six==1.17.0
 sniffio==1.3.1
--e git+https://github.com/P-Saroha/End-to-End-Vehicle-Insurance-Project.git@6761051b0b5f483c3021dfd42f516963e56a429b#egg=src
+-e .
 stack-data==0.6.3
 starlette==0.48.0
 threadpoolctl==3.6.0
